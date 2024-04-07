@@ -1,10 +1,16 @@
-class Solution(object):
-    def checkValidString(self, s):
-        lo=hi=0
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        leftMin, leftMax = 0, 0
+
         for c in s:
-            lo += 1 if c =='(' else -1
-            hi += 1 if c != ')' else -1
-            if hi < 0: break
-            lo = max(lo,0)
-        return lo == 0
-        
+            if c == "(":
+                leftMin, leftMax = leftMin + 1, leftMax + 1
+            elif c == ")":
+                leftMin, leftMax = leftMin - 1, leftMax - 1
+            else:
+                leftMin, leftMax = leftMin - 1, leftMax + 1
+            if leftMax < 0:
+                return False
+            if leftMin < 0:
+                leftMin = 0
+        return leftMin == 0
