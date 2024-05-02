@@ -1,13 +1,8 @@
-class Solution(object):
-    def findMaxK(self, nums):
-        l,r=0,len(nums)-1
+class Solution:
+    def findMaxK(self, nums: List[int]) -> int:
         nums.sort()
-        while l<r:
-            if -nums[l]==nums[r]:
-                return nums[r]
-            elif -nums[l]>nums[r]:
-                l+=1
-            else:
-                r-=1
-        return -1
-        
+        n = len(nums)
+        for i in range(n-1, -1, -1):
+            if nums[i] > 0 and -nums[i] in nums:
+                return nums[i]
+        return -1  # If no such pair found
