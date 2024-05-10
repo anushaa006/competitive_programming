@@ -1,14 +1,6 @@
-class Solution(object):
-    def findRelativeRanks(self, score):
-        d=defaultdict(int)
-        place=["Gold Medal","Silver Medal","Bronze Medal"]
-        n=len(score)
-        a=[" "]*n
-        for i in range(n):d[score[i]]=i
-        score.sort(reverse=True)
-        for i in range(n):
-            if i<3:
-                a[d[score[i]]]=place[i]
-            else:
-                a[d[score[i]]]=str(i+1)
-        return a
+class Solution:
+    def findRelativeRanks(self, score: List[int]) -> List[str]:
+        sorted_score = sorted(score, reverse=True)
+        medals = ["Gold Medal", "Silver Medal", "Bronze Medal"]
+        rank_mapping = {score: medals[i] if i < 3 else str(i + 1) for i, score in enumerate(sorted_score)}
+        return [rank_mapping[score] for score in score]
